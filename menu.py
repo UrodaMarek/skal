@@ -1,82 +1,136 @@
 from interface import prefix
 import os
 from sys import exit
+import json
+import datetime
+from util import clear
 
-
-def main_menu(game_started = True, info = ""):
+def main_menu(game_started = False, info = "", save_data=""):
+  clear()
+  n = 1
   print("""
                   █▒▒ ▒▒   █▒▒                  █▒▒
                 █▒▒    █▒▒ █▒▒                  █▒▒
-                  █▒▒       █▒▒  █▒▒    █▒▒      █▒▒
-                    █▒▒     █▒▒ █▒▒   █▒▒  █▒▒   █▒▒
+                 █▒▒       █▒▒  █▒▒    █▒▒      █▒▒
+                   █▒▒     █▒▒ █▒▒   █▒▒  █▒▒   █▒▒
                       █▒▒  █▒█▒▒    █▒▒   █▒▒   █▒▒
                 █▒▒    █▒▒ █▒▒ █▒▒  █▒▒   █▒▒   █▒▒
                   █▒▒ ▒▒   █▒▒  █▒▒   █▒▒ █▒▒▒ █▒▒▒
-
-                              1. Nowa gra
-                              2. Wczytaj
-                               3. Zapisz
-                              4. Komendy
-                               5. Wyjdź
-  """);
+  """)
+  print("                              "+str(n)+". Nowa gra")
+  n += 1
+  print("                              "+str(n)+". Wczytaj")
+  n += 1
+  if (game_started == True):
+    print("                               "+str(n)+". Zapisz")
+    n += 1
+  print("                              "+str(n)+". Komendy")
+  n += 1
+  if (game_started == False):
+    print("                               "+str(n)+". Wyjdź")
+  if (game_started == True):
+    print("                               "+str(n)+". Wróć")
+  print()
   choice = prefix("Wpisz numer bez kropki"+info)
   info = ""
-  match(choice):
-    case '1':
-      return 
-    case '2':
-      return load()
-    case '3':
-      save(game_started)
-    case '4':
-      commands()
-    case '5':
-      sys.exit()
-    case _:
-      return [False, ", wcześniej podałeś błędną wartość"]
+  if (choice == '1'):
+    return True
+  elif (choice == '2'):
+    return load()
+  elif ((choice == '3') and (game_started == True)):
+    return save(game_started, save_data)
+  elif (((choice == '3') and (game_started == False)) or ((choice == '4') and (game_started == True))):
+    commands()
+  elif ((choice == '4') and (game_started == False)):
+    sys.exit()
+  elif ((choice == '5') and (game_started == True)):
+    return 0
+  else:
+    info = ", błędna wartość"
+    return info
 
 def commands():
-  print()
+  clear()
+  print("""
+  █▒▒   █▒▒                                                      █▒▒          
+  █▒▒  █▒▒                                                       █▒▒          
+  █▒▒ █▒▒        █▒▒     █▒▒▒ █▒▒ █▒▒     █▒▒     █▒▒ █▒▒        █▒▒ █▒▒   █▒▒
+  █▒ █▒        █▒▒  █▒▒   █▒▒  █▒  █▒▒  █▒   █▒▒   █▒▒  █▒▒  █▒▒ █▒▒   █▒▒▒▒▒ 
+  █▒▒  █▒▒    █▒▒    █▒▒  █▒▒  █▒  █▒▒ █▒▒▒▒▒ █▒▒  █▒▒  █▒▒ █▒   █▒▒     █▒▒  
+  █▒▒   █▒▒    █▒▒  █▒▒   █▒▒  █▒  █▒▒ █▒          █▒▒  █▒▒ █▒   █▒▒    █▒▒   
+  █▒▒     █▒▒    █▒▒     █▒▒▒  █▒  █▒▒   █▒▒▒▒    █▒▒▒  █▒▒  █▒▒ █▒▒ █▒▒▒▒    
+  """)
 
-def  load(info = ""):
+def  load():
+  clear()
+  info=""
   while(1 < 2):
     save_file_existence()
-    saves_file = open("~/.skal/saves.save", "r")
-    if not os.stat("~/.skal/saves.save").st_size == 0:
-      for line in saves_file.readlines():
-        print(line)
+    saves_file = open(".saves/saves.save", "r")
+    if not os.stat(".saves/saves.save").st_size == 0:
+      print("""
+                      █▒▒▒▒▒▒▒ █▒▒                                          
+                             █▒▒                        █▒                  
+                            █▒▒       █▒▒     █▒ █▒▒        █▒▒▒▒  █▒▒   █▒▒
+                          █▒▒       █▒▒  █▒▒  █▒  █▒▒  █▒▒ █▒▒       █▒▒▒▒▒ 
+                         █▒▒       █▒▒   █▒▒  █▒█▒▒    █▒▒   █▒▒▒      █▒▒  
+                       █▒▒         █▒▒   █▒▒  █▒▒      █▒▒     █▒▒    █▒▒   
+                      █▒▒▒▒▒▒▒▒▒▒▒   █▒▒ █▒▒▒ █▒▒      █▒▒ █▒▒ █▒▒ █▒▒▒▒    
+      """)
+      print(saves_file.read())
+      print()
       saves_file.close()
       name = prefix("Podaj nazwe zapisu"+info)
       info = ""
-      if name.startswith('.') or not os.path.exists("~/.skal/"+name+".save"):
-        info =", wcześniej podałeś błędną wartość"
+      if name.startswith('.') or not os.path.exists(".saves/"+name+".json"):
+        info = ", brak podanej nazwy"
         continue
-      save_file = open("~/.skal/"+name+".save")
-      load = save_file.readlines
+      save_file = open(".saves/"+name+".json")
+      load = save_file.read()
       save_file.close()
-      return load
+      return json.loads(load)
     else:
       saves_file.close()
-      return 0
+      info = ", brak zapisu postępów"
+      return info
 
-def save(game_started):
-  if game_started == True:
+def save(game_started, save_data):
+  clear()
+  info=""
+  while(1 < 2):
     save_file_existence()
-
-    save = open("~/.skal/saves.save", "a+")
-
-    for line in save.readlines():
-      print(line)
-
-    save.close()
-
-  else:
-    return [False, ", nie masz nic do zapisania"]
+    saves_file = open(".saves/saves.save")
+    print("""
+                    █▒▒▒▒▒▒▒ █▒▒                                          
+                           █▒▒                        █▒                  
+                          █▒▒       █▒▒     █▒ █▒▒        █▒▒▒▒  █▒▒   █▒▒
+                        █▒▒       █▒▒  █▒▒  █▒  █▒▒  █▒▒ █▒▒       █▒▒▒▒▒ 
+                       █▒▒       █▒▒   █▒▒  █▒█▒▒    █▒▒   █▒▒▒      █▒▒  
+                     █▒▒         █▒▒   █▒▒  █▒▒      █▒▒     █▒▒    █▒▒   
+                    █▒▒▒▒▒▒▒▒▒▒▒   █▒▒ █▒▒▒ █▒▒      █▒▒ █▒▒ █▒▒ █▒▒▒▒    
+    """)
+    print(saves_file.read())
+    print()
+    saves_file.close()
+    print()
+    name = prefix("Podaj nazwe zapisu"+info)
+    info = ""
+    if name.startswith('.'):
+      info =", błędna nazwa"
+      continue
+    save_file = open(".saves/"+name+".json", "w")
+    save_file.write(json.dumps(save_data))
+    save_file.close()
+    saves_file = open(".saves/saves.save", "a")
+    now = datetime.datetime.now()
+    saves_file.write("                              "+name+" - "+str(now)+"\n")
+    saves_file.close()
+    return 0
 
 
 
 def save_file_existence():
-  if not os.path.exists("~/.skal/saves.save"):
-      os.makedirs("~/.skal")
-      file = open("~/.skal/saves.save", "w+")
+  if not os.path.exists(".saves/saves.save"):
+      os.makedirs(".saves")
+      file = open(".saves/saves.save", "x")
       file.close()
