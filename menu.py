@@ -5,7 +5,7 @@ import json
 import datetime
 from util import clear
 
-def main_menu(game_started = False, info = "", save_data=""):
+def main_menu(game_started, info, save_data):
   clear()
   n = 1
   print("""
@@ -125,7 +125,7 @@ def save(game_started, save_data):
     now = datetime.datetime.now()
     saves_file.write("                              "+name+" - "+str(now)+"\n")
     saves_file.close()
-    return 0
+    return 1
 
 
 
