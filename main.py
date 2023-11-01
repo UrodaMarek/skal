@@ -1,4 +1,7 @@
 from menu import main_menu
+import world.world
+import util
+import test
 
 def menu(info, game_started, save_data):
     while 1 < 2:
@@ -19,6 +22,5 @@ info = ""
 game_started = False
 save_data = {}
 data = menu(info, game_started, save_data)
-
-
-
+util.clear()
+world = world.world.gen_world()
