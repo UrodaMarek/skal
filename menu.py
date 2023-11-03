@@ -4,19 +4,12 @@ from sys import exit
 import json
 import datetime
 from util import clear
+from ascii_art import main_logo, commands_logo, save_logo
 
 def main_menu(game_started, info, save_data):
   clear()
   n = 1
-  print("""
-                  █▒▒ ▒▒   █▒▒                  █▒▒
-                █▒▒    █▒▒ █▒▒                  █▒▒
-                 █▒▒       █▒▒  █▒▒    █▒▒      █▒▒
-                   █▒▒     █▒▒ █▒▒   █▒▒  █▒▒   █▒▒
-                      █▒▒  █▒█▒▒    █▒▒   █▒▒   █▒▒
-                █▒▒    █▒▒ █▒▒ █▒▒  █▒▒   █▒▒   █▒▒
-                  █▒▒ ▒▒   █▒▒  █▒▒   █▒▒ █▒▒▒ █▒▒▒
-  """)
+  print(main_logo)
   print("                              "+str(n)+". Nowa gra")
   n += 1
   print("                              "+str(n)+". Wczytaj")
@@ -51,15 +44,7 @@ def main_menu(game_started, info, save_data):
 
 def commands():
   clear()
-  print("""
-  █▒▒   █▒▒                                                      █▒▒          
-  █▒▒  █▒▒                                                       █▒▒          
-  █▒▒ █▒▒        █▒▒     █▒▒▒ █▒▒ █▒▒     █▒▒     █▒▒ █▒▒        █▒▒ █▒▒   █▒▒
-  █▒ █▒        █▒▒  █▒▒   █▒▒  █▒  █▒▒  █▒   █▒▒   █▒▒  █▒▒  █▒▒ █▒▒   █▒▒▒▒▒ 
-  █▒▒  █▒▒    █▒▒    █▒▒  █▒▒  █▒  █▒▒ █▒▒▒▒▒ █▒▒  █▒▒  █▒▒ █▒   █▒▒     █▒▒  
-  █▒▒   █▒▒    █▒▒  █▒▒   █▒▒  █▒  █▒▒ █▒          █▒▒  █▒▒ █▒   █▒▒    █▒▒   
-  █▒▒     █▒▒    █▒▒     █▒▒▒  █▒  █▒▒   █▒▒▒▒    █▒▒▒  █▒▒  █▒▒ █▒▒ █▒▒▒▒    
-  """)
+  print(commands_logo)
 
 def  load():
   clear()
@@ -68,15 +53,7 @@ def  load():
     save_file_existence()
     saves_file = open(".saves/saves.save", "r")
     if not os.stat(".saves/saves.save").st_size == 0:
-      print("""
-                      █▒▒▒▒▒▒▒ █▒▒                                          
-                             █▒▒                        █▒                  
-                            █▒▒       █▒▒     █▒ █▒▒        █▒▒▒▒  █▒▒   █▒▒
-                          █▒▒       █▒▒  █▒▒  █▒  █▒▒  █▒▒ █▒▒       █▒▒▒▒▒ 
-                         █▒▒       █▒▒   █▒▒  █▒█▒▒    █▒▒   █▒▒▒      █▒▒  
-                       █▒▒         █▒▒   █▒▒  █▒▒      █▒▒     █▒▒    █▒▒   
-                      █▒▒▒▒▒▒▒▒▒▒▒   █▒▒ █▒▒▒ █▒▒      █▒▒ █▒▒ █▒▒ █▒▒▒▒    
-      """)
+      print(save_logo)
       print(saves_file.read())
       print()
       saves_file.close()
@@ -100,15 +77,7 @@ def save(game_started, save_data):
   while(1 < 2):
     save_file_existence()
     saves_file = open(".saves/saves.save")
-    print("""
-                    █▒▒▒▒▒▒▒ █▒▒                                          
-                           █▒▒                        █▒                  
-                          █▒▒       █▒▒     █▒ █▒▒        █▒▒▒▒  █▒▒   █▒▒
-                        █▒▒       █▒▒  █▒▒  █▒  █▒▒  █▒▒ █▒▒       █▒▒▒▒▒ 
-                       █▒▒       █▒▒   █▒▒  █▒█▒▒    █▒▒   █▒▒▒      █▒▒  
-                     █▒▒         █▒▒   █▒▒  █▒▒      █▒▒     █▒▒    █▒▒   
-                    █▒▒▒▒▒▒▒▒▒▒▒   █▒▒ █▒▒▒ █▒▒      █▒▒ █▒▒ █▒▒ █▒▒▒▒    
-    """)
+    print(save_logo)
     print(saves_file.read())
     print()
     saves_file.close()

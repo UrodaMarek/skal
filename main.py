@@ -1,5 +1,5 @@
 from menu import main_menu
-import world.world
+from world import gen_world, gen_village_0
 import util
 import test
 
@@ -23,4 +23,6 @@ game_started = False
 save_data = {}
 data = menu(info, game_started, save_data)
 util.clear()
-world = world.world.gen_world()
+world = gen_world()
+village_0 = gen_village_0()
+print(village_0[11])
