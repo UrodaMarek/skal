@@ -1,7 +1,8 @@
 from menu import main_menu
-from world import gen_world, gen_village_0
+from world import gen_world, gen_village
 import util
 import test
+import ascii_art
 
 def menu(info, game_started, save_data):
     while 1 < 2:
@@ -24,5 +25,4 @@ save_data = {}
 data = menu(info, game_started, save_data)
 util.clear()
 world = gen_world()
-village_0 = gen_village_0()
-print(village_0[11])
+village_0 = gen_village(ascii_art.village_0_map)
