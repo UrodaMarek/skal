@@ -1,8 +1,10 @@
 from menu import main_menu
 from world import gen_world, gen_village
-import util
 import test
 import ascii_art
+import entity.human
+from prologue import prologue
+from interface import clear
 
 def menu(info, game_started, save_data):
     while 1 < 2:
@@ -23,6 +25,6 @@ info = ""
 game_started = False
 save_data = {}
 data = menu(info, game_started, save_data)
-util.clear()
-world = gen_world()
-village_0 = gen_village(ascii_art.village_0_map)
+clear()
+prologue()
+

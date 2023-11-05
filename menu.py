@@ -1,9 +1,8 @@
-from interface import prefix
+from interface import prefix, clear
 import os
 from sys import exit
 import json
 import datetime
-from util import clear
 from ascii_art import main_logo, commands_logo, save_logo
 
 def main_menu(game_started, info, save_data):
