@@ -59,16 +59,42 @@ class Human(Entity):
         return cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex)
 
 class Hero(Human):
-    health = 15 
-    name = "Nói"
-    surname = "Gunnarsson"
-    def __init__(self, position):
+    
+    def __init__(self, name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation):
+        self.reputation = 100 + equipment.get_buff("reputation")
+        super().__init__(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex)
+    
+    @classmethod
+    def create_hero(cls, position):
+        health = 15 
+        name = "Nói"
+        surname = "Gunnarsson"
         equipment = Equipment({"helmet": things.Armor("Skórzany chełm", 5, 1, {"armor": 2}, "Common", 2, 30, {"armor": 3, "concentration": 3, "delay": -3}, "Skórzany wojownik", "helmet"), "chest": things.Armor("Skórzany napierśnik", 10, 2, {"armor": 2}, "Common", 2, 50, {"armor": 3, "reputation": 2}, "Skórzany wojownik", "chest"), "legs": things.Armor("Skórzane spodnie", 7, 2, {"armor": 2}, "Common", 2, 50, {"armor": 3, "reputation": 2}, "Skórzany wojownik", "legs"), "boots": things.Armor("Skórzane buty", 3, 1, {"armor": 2}, "Common", 1, 50, {"armor": 3, "reputation": 2}, "Skórzany wojownik", "boots"), "l_hand": things.Weapon("Tarcza obita skórą", "tarcza", "Skórzany wojownik", {"armor": 4, "delay": -4}, None, "Common", False, False, 3, 50, 5, 0, 2), "r_hand": things.Weapon("Toporek ze skórzaną rękojeścią", "toporek", "Skórzany wojownik", {"damage": 3}, None, "Common", False, False, 3, 50, 3, 10, 2), "amulet": things.Amulet("Skórzany amulet", {"armor": 3}, "Common", 2, {"armor": 3, "reputation": 2}, "Skórzany wojownik")}, [], 0)
         armor = equipment.get_buff("armor") + equipment.get_armor()
         attack = 5 + equipment.get_damage()
         delay = 2 + equipment.get_buff("delay") + equipment.get_delay()
         concentration = 4 + equipment.get_buff("concentration")
-        self.reputation = 100 + equipment.get_buff("reputation")
+        reputation = 100 + equipment.get_buff("reputation")
         profession = "warrior"
         sex = "male"
-        super().__init__(self.name, self.surname, self.health, armor, equipment, delay, attack, profession, concentration, position, sex)
+        cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation)
+
+
+    @classmethod
+    def create_pre_hero(cls, position):
+        health = 5 
+        name = "Nói"
+        surname = "Gunnarsson"
+        equipment = None
+        armor = None
+        attack = None
+        delay = 2
+        concentration = 4
+        reputation = 100
+        profession = None
+        sex = "male"
+        cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation)
+
+    def change_position(self, change):
+        self.position['x'] += change['x']
+        self.position['y'] += change['y']

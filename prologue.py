@@ -1,5 +1,5 @@
 from time import sleep
-from interface import say, prefix, clear
+from interface import say, prefix, clear, command_line
 from ascii_art import odin_face, village_6_map
 from world import gen_village
 from entity.human import Human, Hero
@@ -22,4 +22,6 @@ I pomnę dziewięć światów i dziewięć
         clear()
         sleep(0.5)
     dream_world = gen_village(village_6_map)
-    
+    pre_hero = Hero.create_pre_hero({'x': 7,'y': 40})
+    pre_object = dream_world[pre_hero.position['x']][pre_hero.position['y']]
+    command_line(pre_hero, dream_world, pre_object)
