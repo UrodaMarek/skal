@@ -3,7 +3,7 @@ from time import sleep
 from os import system
 from entity.human import Hero
 import ascii_art
-from world import gen_village, gen_world
+from world import gen_village, gen_world, find_hero
 
 clear = lambda: system('clear')
 
@@ -17,42 +17,112 @@ def prefix(title):
     input0 = input("███:[ " + title + " ]:███⮞ ")
     return input0
 
-def command_line(hero, world_map, pre_object):
+def command_line(hero, world_map, pre_world_map):
     input0 = prefix(Hero.name+' '+Hero.surname)
     input0 = input0.strip()
     command, flag = input0.split(' ')
-    wall_chars = ('.','Æ','┋','┅','═','║','╝','╔','╗','╚','&','%')
+    wall_chars = ('.','┋','┅','═','║','╝','╔','╗','╚','&','%')
     match command:
         case 'go':
             match flag:
                 case 'north':
-
+                    if world_map[hero.position['x']][hero.position['y'] - 1].char == 'O':
+                        match gen_village(world_map[hero.position['x']][hero.position['y'] - 1].village_number):
+                            case 0:
+                                str_map = ascii_art.village_0_map
+                            case 1:
+                                str_map = ascii_art.village_1_map
+                            case 2:
+                                str_map = ascii_art.village_2_map
+                            case 3:
+                                str_map = ascii_art.village_3_map
+                            case 4:
+                                str_map = ascii_art.village_4_map
+                            case 5:
+                                str_map = ascii_art.village_5_map
+                            case 6:
+                                str_map = ascii_art.village_6_map
+                        pre_world_map = world_map
+                        world_map = gen_village(str_map)
+                        hero.pre_object = world_map[int(str_map.index('\n')/2)][int(len(str_map)/(str_map.index('\n')))-1]
+                        hero.change_position({'x': int((len(str_map)/(str_map.index('\n')))/2), 'y': str_map.index('\n')-1})
+                        return (hero, world_map, pre_world_map)
+                    elif world_map[hero.position['x']][hero.position['y'] - 1].char == 'Æ':
+                        world_map = pre_world_map
+                        hero.pre_object = find_hero(pre_world_map).pre_object
+                        hero.change_position(find_hero(pre_world_map).position)
+                        return (hero, world_map, None)
                     for wall_char in wall_chars:
-                        if world_map[hero.position['x']][hero.position['y'] - 1].char == 'O':
-                            match gen_village(world_map[hero.position['x']][hero.position['y'] - 1].village_number):
-                                case 0:
-                                    str_map = ascii_art.village_0_map
-                                case 1:
-                                    str_map = ascii_art.village_1_map
-                                case 2:
-                                    str_map = ascii_art.village_2_map
-                                case 3:
-                                    str_map = ascii_art.village_3_map
-                                case 4:
-                                    str_map = ascii_art.village_4_map
-                                case 5:
-                                    str_map = ascii_art.village_5_map
-                                case 6:
-                                    str_map = ascii_art.village_6_map
-                            pre_world_map = world_map
-                            world_map = gen_village(str_map)
-                            pre_object = world_map[int(str_map.index('\n')/2)][int(len(str_map)/(str_map.index('\n')))-1]
-                            hero.change_position({'x': int((len(str_map)/(str_map.index('\n')))/2), 'y': str_map.index('\n')-1})
-                            return (hero, world_map, pre_object, pre_world_map)
-                        elif world_map[hero.position['x']][hero.position['y'] - 1].char == 'Æ':
-                            ????
-                        elif not ((world_map[hero.position['x']][hero.position['y'] - 1].char == wall_char) or ((hero.position['y'] - 1) < 0)):
-                            world_map[hero.position['x']][hero.position['y']] = pre_object
-                            pre_object = world_map[hero.position['x']][hero.position['y'] - 1]
+                        if not ((world_map[hero.position['x']][hero.position['y'] - 1].char == wall_char) or ((hero.position['y'] - 1) < 0)):
+                            world_map[hero.position['x']][hero.position['y']] = hero.pre_object
+                            hero.pre_object = world_map[hero.position['x']][hero.position['y'] - 1]
                             hero.change_position({'x': 0, 'y': -1})
-                            return (hero, world_map, pre_object, None)
+                            return (hero, world_map, None)
+
+                case 'south':
+                    if world_map[hero.position['x']][hero.position['y'] + 1].char == 'O':
+                        match gen_village(world_map[hero.position['x']][hero.position['y'] + 1].village_number):
+                            case 0:
+                                str_map = ascii_art.village_0_map
+                            case 1:
+                                str_map = ascii_art.village_1_map
+                            case 2:
+                                str_map = ascii_art.village_2_map
+                            case 3:
+                                str_map = ascii_art.village_3_map
+                            case 4:
+                                str_map = ascii_art.village_4_map
+                            case 5:
+                                str_map = ascii_art.village_5_map
+                            case 6:
+                                str_map = ascii_art.village_6_map
+                        pre_world_map = world_map
+                        world_map = gen_village(str_map)
+                        hero.pre_object = world_map[int(str_map.index('\n')/2)][int(len(str_map)/(str_map.index('\n')))-1]
+                        hero.change_position({'x': int((len(str_map)/(str_map.index('\n')))/2), 'y': str_map.index('\n')-1})
+                        return (hero, world_map, pre_world_map)
+                    elif world_map[hero.position['x']][hero.position['y'] + 1].char == 'Æ':
+                        world_map = pre_world_map
+                        hero.pre_object = find_hero(pre_world_map).pre_object
+                        hero.change_position(find_hero(pre_world_map).position)
+                        return (hero, world_map, None)
+                    for wall_char in wall_chars:?????
+                        if not ((world_map[hero.position['x']][hero.position['y'] + 1].char == wall_char) or ((hero.position['y'] + 1) < str_map.index('\n')-1)):
+                            world_map[hero.position['x']][hero.position['y']] = hero.pre_object
+                            hero.pre_object = world_map[hero.position['x']][hero.position['y'] + 1]
+                            hero.change_position({'x': 0, 'y': 1})
+                            return (hero, world_map, None)
+                
+                case 'east':
+                    if world_map[hero.position['x'] + 1][hero.position['y']].char == 'O':
+                        match gen_village(world_map[hero.position['x'] + 1][hero.position['y']].village_number):
+                            case 0:
+                                str_map = ascii_art.village_0_map
+                            case 1:
+                                str_map = ascii_art.village_1_map
+                            case 2:
+                                str_map = ascii_art.village_2_map
+                            case 3:
+                                str_map = ascii_art.village_3_map
+                            case 4:
+                                str_map = ascii_art.village_4_map
+                            case 5:
+                                str_map = ascii_art.village_5_map
+                            case 6:
+                                str_map = ascii_art.village_6_map
+                        pre_world_map = world_map
+                        world_map = gen_village(str_map)
+                        hero.pre_object = world_map[int(str_map.index('\n')/2)][int(len(str_map)/(str_map.index('\n')))-1]
+                        hero.change_position({'x': int((len(str_map)/(str_map.index('\n')))/2), 'y': str_map.index('\n')-1})
+                        return (hero, world_map, pre_world_map)
+                    elif world_map[hero.position['x'] + 1][hero.position['y']].char == 'Æ':
+                        world_map = pre_world_map
+                        hero.pre_object = find_hero(pre_world_map).pre_object
+                        hero.change_position(find_hero(pre_world_map).position)
+                        return (hero, world_map, None)
+                    for wall_char in wall_chars:
+                        if not ((world_map[hero.position['x'] + 1][hero.position['y']].char == wall_char) or ((hero.position['x'] + 1) < str_map.index('\n'))):
+                            world_map[hero.position['x']][hero.position['y']] = hero.pre_object
+                            hero.pre_object = world_map[hero.position['x'] + 1][hero.position['y']]
+                            hero.change_position({'x': 1, 'y': 0})
+                            return (hero, world_map, None)

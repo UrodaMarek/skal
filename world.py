@@ -73,3 +73,8 @@ def gen_village(str_map):
                         village[i].append(Structures("kąt_ściany_3", 0, '╝'))
     return village
 
+def find_hero(pre_world_map):
+    for i in range(0, 220):
+        for j in range(0, 272):
+            if pre_world_map[i][j].char == '&':
+                return pre_world_map[i][j]

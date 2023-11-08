@@ -21,7 +21,9 @@ I pomnę dziewięć światów i dziewięć
         print(odin_face)
         clear()
         sleep(0.5)
-    dream_world = gen_village(village_6_map)
-    pre_hero = Hero.create_pre_hero({'x': 7,'y': 40})
-    pre_object = dream_world[pre_hero.position['x']][pre_hero.position['y']]
-    command_line(pre_hero, dream_world, pre_object)
+    world = gen_village(village_6_map)
+    hero = Hero.create_pre_hero({'x': 7,'y': 40})
+    hero.pre_object = world[pre_hero.position['x']][pre_hero.position['y']]
+    pre_world_map = None
+    while 1 < 2:
+        command_line(hero, world, pre_world_map)

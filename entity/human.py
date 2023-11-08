@@ -59,7 +59,7 @@ class Human(Entity):
         return cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex)
 
 class Hero(Human):
-    
+    pre_object = None
     def __init__(self, name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation):
         self.reputation = 100 + equipment.get_buff("reputation")
         super().__init__(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex)
