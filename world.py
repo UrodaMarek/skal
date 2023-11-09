@@ -6,6 +6,10 @@ class Biom:
         self.delay = delay
         self.char = char
 
+class Village(Biom):
+    def __init__(self, name, delay, char, village_number):
+        self.village_number = village_number
+        super().__init__(name, delay, char)
 class Structures:
     def __init__(self, name, delay, char):
         self.name = name
@@ -14,6 +18,8 @@ class Structures:
 
 def gen_world():
     world = []
+    increment_of_houses = 0
+    village_number = 1
     for i in range(0, 220):
         world.append([])
         for j in range(0, 272):
@@ -29,7 +35,10 @@ def gen_world():
                     case '⁕':
                         world[i].append(Biom("plarza", 3, '⁕'))
                     case 'O':
-                        world[i].append(Biom("miasto", 0, 'O'))
+                        world[i].append(Village("miasto", 0, 'O', village_number))
+                        increment_of_houses += 1
+                        match increment_of_houses:
+                            case:
     return world
 
 def gen_village(str_map):
