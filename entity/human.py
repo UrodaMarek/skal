@@ -61,7 +61,7 @@ class Human(Entity):
 class Hero(Human):
     pre_object = None
     def __init__(self, name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation):
-        self.reputation = 100 + equipment.get_buff("reputation")
+        self.reputation = reputation + equipment.get_buff("reputation")
         super().__init__(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex)
     
     @classmethod
@@ -74,7 +74,7 @@ class Hero(Human):
         attack = 5 + equipment.get_damage()
         delay = 2 + equipment.get_buff("delay") + equipment.get_delay()
         concentration = 4 + equipment.get_buff("concentration")
-        reputation = 100 + equipment.get_buff("reputation")
+        reputation = 100
         profession = "warrior"
         sex = "male"
         cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation)
@@ -85,9 +85,9 @@ class Hero(Human):
         health = 5 
         name = "Nói"
         surname = "Gunnarsson"
-        equipment = None
-        armor = None
-        attack = None
+        equipment = Equipment({}, [], 0)
+        armor = 0
+        attack = 0
         delay = 2
         concentration = 4
         reputation = 100

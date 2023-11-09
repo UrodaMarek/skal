@@ -38,7 +38,20 @@ def gen_world():
                         world[i].append(Village("miasto", 0, 'O', village_number))
                         increment_of_houses += 1
                         match increment_of_houses:
-                            case:
+                            case 2:
+                                village_number = 6
+                            case 3:
+                                village_number = 5
+                            case 6:
+                                village_number = 4
+                            case 19:
+                                village_number = 3
+                            case 25:
+                                village_number = 2
+                            case 29:
+                                village_number = 1
+                            case 31:
+                                village_number = 0
     return world
 
 def gen_village(str_map):
@@ -87,3 +100,9 @@ def find_hero(pre_world_map):
         for j in range(0, 272):
             if pre_world_map[i][j].char == '&':
                 return pre_world_map[i][j]
+
+def print_world(world):
+    for i in range(0, len(world)):
+        for j in range(0, len(world[0])):
+            print(world[i][j].char, end='')
+    print()

@@ -1,7 +1,7 @@
 from time import sleep
 from interface import say, prefix, clear, command_line
 from ascii_art import odin_face, village_6_map
-from world import gen_village
+from world import gen_village, print_world
 from entity.human import Human, Hero
 
 def prologue():
@@ -23,7 +23,15 @@ I pomnę dziewięć światów i dziewięć
         sleep(0.5)
     world = gen_village(village_6_map)
     hero = Hero.create_pre_hero({'x': 7,'y': 40})
-    hero.pre_object = world[pre_hero.position['x']][pre_hero.position['y']]
+    hero.pre_object = world[hero.position['x']][hero.position['y']]
+    world[hero.position['x']][hero.position['y']] = hero
     pre_world_map = None
     while 1 < 2:
-        command_line(hero, world, pre_world_map)
+        print_world(world)
+        returned = command_line(hero, world, pre_world_map, "", save_data)
+        if type(returned) == dict:
+            return (returned, False)
+        elif type(returned) == tuple:
+            hero = returned[0]
+            world = returned[1]
+            pre_world_map = returned[2]

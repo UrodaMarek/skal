@@ -4,7 +4,6 @@ from os import system
 from entity.human import Hero
 import ascii_art
 from world import gen_village, gen_world, find_hero
-from main import menu
 
 clear = lambda: system('clear')
 
@@ -18,7 +17,7 @@ def prefix(title):
     input0 = input("███:[ " + title + " ]:███⮞ ")
     return input0
 
-def command_line(hero, world_map, pre_world_map):
+def command_line(hero, world_map, pre_world_map, info, save_data):
     input0 = prefix(Hero.name+' '+Hero.surname)
     input0 = input0.strip()
     command, flag = input0.split(' ')
@@ -188,3 +187,7 @@ def command_line(hero, world_map, pre_world_map):
                         return (hero, world_map, None)
                 case _:
                     pass
+        case 'menu':
+            menu(info, True, save_data)
+        case _:
+            pass
