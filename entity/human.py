@@ -77,7 +77,7 @@ class Hero(Human):
         reputation = 100
         profession = "warrior"
         sex = "male"
-        cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation)
+        return cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation)
 
 
     @classmethod
@@ -93,7 +93,7 @@ class Hero(Human):
         reputation = 100
         profession = None
         sex = "male"
-        cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation)
+        return cls(name, surname, health, armor, equipment, delay, attack, profession, concentration, position, sex, reputation)
 
     def change_position(self, change):
         self.position['x'] += change['x']

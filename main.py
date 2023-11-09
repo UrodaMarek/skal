@@ -26,5 +26,5 @@ game_started = False
 save_data = {}
 data = menu(info, game_started, save_data)
 clear()
-prologue()
+prologue(data)
 

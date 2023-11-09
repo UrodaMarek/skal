@@ -18,7 +18,7 @@ def prefix(title):
     return input0
 
 def command_line(hero, world_map, pre_world_map, info, save_data):
-    input0 = prefix(Hero.name+' '+Hero.surname)
+    input0 = prefix(hero.name+' '+hero.surname)
     input0 = input0.strip()
     command, flag = input0.split(' ')
     wall_chars = ('.','┋','┅','═','║','╝','╔','╗','╚','&','%')
@@ -46,6 +46,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                         world_map = gen_village(str_map)
                         hero.pre_object = world_map[int(len(world_map[-1]/2))][-1]
                         hero.change_position({'x': int(len(world_map[-1]/2)), 'y': -1})
+                        world_map[hero.position['x']][hero.position['y']] = hero
                         return (hero, world_map, pre_world_map)
 
                     elif world_map[hero.position['x']][hero.position['y'] - 1].char == 'Æ':
@@ -63,6 +64,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                         world_map[hero.position['x']][hero.position['y']] = hero.pre_object
                         hero.pre_object = world_map[hero.position['x']][hero.position['y'] - 1]
                         hero.change_position({'x': 0, 'y': -1})
+                        world_map[hero.position['x']][hero.position['y']] = hero
                         return (hero, world_map, None)
 
                 case 'south':
@@ -86,6 +88,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                         world_map = gen_village(str_map)
                         hero.pre_object = world_map[int(len(world_map[-1]/2))][-1]
                         hero.change_position({'x': int(len(world_map[-1]/2)), 'y': -1})
+                        world_map[hero.position['x']][hero.position['y']] = hero
                         return (hero, world_map, pre_world_map)
 
                     elif world_map[hero.position['x']][hero.position['y'] + 1].char == 'Æ':
@@ -103,6 +106,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                         world_map[hero.position['x']][hero.position['y']] = hero.pre_object
                         hero.pre_object = world_map[hero.position['x']][hero.position['y'] + 1]
                         hero.change_position({'x': 0, 'y': 1})
+                        world_map[hero.position['x']][hero.position['y']] = hero
                         return (hero, world_map, None)
 
                 
@@ -127,6 +131,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                         world_map = gen_village(str_map)
                         hero.pre_object = world_map[int(len(world_map[-1]/2))][-1]
                         hero.change_position({'x': int(len(world_map[-1]/2)), 'y': -1})
+                        world_map[hero.position['x']][hero.position['y']] = hero
                         return (hero, world_map, pre_world_map)
 
                     elif world_map[hero.position['x'] + 1][hero.position['y']].char == 'Æ':
@@ -144,6 +149,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                         world_map[hero.position['x']][hero.position['y']] = hero.pre_object
                         hero.pre_object = world_map[hero.position['x'] + 1][hero.position['y']]
                         hero.change_position({'x': 1, 'y': 0})
+                        world_map[hero.position['x']][hero.position['y']] = hero
                         return (hero, world_map, None)
 
                 case 'west':
@@ -167,6 +173,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                         world_map = gen_village(str_map)
                         hero.pre_object = world_map[int(len(world_map[-1]/2))][-1]
                         hero.change_position({'x': int(len(world_map[-1]/2)), 'y': -1})
+                        world_map[hero.position['x']][hero.position['y']] = hero
                         return (hero, world_map, pre_world_map)
 
                     elif world_map[hero.position['x'] - 1][hero.position['y']].char == 'Æ':
@@ -184,6 +191,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                         world_map[hero.position['x']][hero.position['y']] = hero.pre_object
                         hero.pre_object = world_map[hero.position['x'] + 1][hero.position['y']]
                         hero.change_position({'x': -1, 'y': 0})
+                        world_map[hero.position['x']][hero.position['y']] = hero
                         return (hero, world_map, None)
                 case _:
                     pass

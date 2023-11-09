@@ -105,4 +105,4 @@ def print_world(world):
     for i in range(0, len(world)):
         for j in range(0, len(world[0])):
             print(world[i][j].char, end='')
-    print()
+        print()

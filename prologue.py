@@ -4,7 +4,7 @@ from ascii_art import odin_face, village_6_map
 from world import gen_village, print_world
 from entity.human import Human, Hero
 
-def prologue():
+def prologue(save_data):
     say("""
 Słów mych słuchajcie, potomkowie święci,
 Wyżsi i niżsi Heimdalla synowie,
@@ -29,6 +29,7 @@ I pomnę dziewięć światów i dziewięć
     while 1 < 2:
         print_world(world)
         returned = command_line(hero, world, pre_world_map, "", save_data)
+        clear
         if type(returned) == dict:
             return (returned, False)
         elif type(returned) == tuple:
