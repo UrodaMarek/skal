@@ -22,14 +22,14 @@ I pomnę dziewięć światów i dziewięć
         clear()
         sleep(0.5)
     world = gen_village(village_6_map)
-    hero = Hero.create_pre_hero({'x': 7,'y': 40})
-    hero.pre_object = world[hero.position['x']][hero.position['y']]
-    world[hero.position['x']][hero.position['y']] = hero
+    hero = Hero.create_pre_hero({'x': 40,'y': 7})
+    hero.pre_object = world[hero.position['y']][hero.position['x']]
+    world[hero.position['y']][hero.position['x']] = hero
     pre_world_map = None
     while 1 < 2:
         print_world(world)
         returned = command_line(hero, world, pre_world_map, "", save_data)
-        clear
+        clear()
         if type(returned) == dict:
             return (returned, False)
         elif type(returned) == tuple:
