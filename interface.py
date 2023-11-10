@@ -20,7 +20,11 @@ def prefix(title):
 def command_line(hero, world_map, pre_world_map, info, save_data):
     input0 = prefix(hero.name+' '+hero.surname)
     input0 = input0.strip()
-    command, flag = input0.split(' ')
+    try:
+        command, flag = input0.split(' ')
+    except ValueError:
+        command = input0
+        flag = ""
     wall_chars = ('.','┋','┅','═','║','╝','╔','╗','╚','&','%')
     match command:
         case 'go':
@@ -189,7 +193,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                             if (world_map[hero.position['y']][hero.position['x'] - 1].char == wall_char):
                                 return (hero, world_map, None)
                         world_map[hero.position['y']][hero.position['x']] = hero.pre_object
-                        hero.pre_object = world_map[hero.position['y']][hero.position['x'] + 1]
+                        hero.pre_object = world_map[hero.position['y']][hero.position['x'] - 1]
                         hero.change_position({'x': -1, 'y': 0})
                         world_map[hero.position['y']][hero.position['x']] = hero
                         return (hero, world_map, None)
