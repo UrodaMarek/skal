@@ -20,7 +20,7 @@ def prefix(title):
     input0 = input("███:[ " + title + " ]:███⮞ ")
     return input0
 
-def command_line(hero, world_map, pre_world_map, info, save_data):
+def command_line(hero, world_map, pre_world_map, info, save_data, can_out):
     input0 = prefix(hero.name+' '+hero.surname)
     input0 = input0.strip()
     try:
@@ -58,7 +58,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                             hero.pre_object = world_map[hero.position['y']][hero.position['x']]
                             world_map[hero.position['y']][hero.position['x']] = hero
 
-                        elif world_map[hero.position['y'] - 1][hero.position['x']].char == 'Æ':
+                        elif (world_map[hero.position['y'] - 1][hero.position['x']].char == 'Æ') and (can_out == True):
                             world_map = pre_world_map
                             hero.pre_object = find_hero(pre_world_map).pre_object
                             hero.change_position(find_hero(pre_world_map).position)
@@ -98,7 +98,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                             hero.pre_object = world_map[hero.position['y']][hero.position['x']]
                             world_map[hero.position['y']][hero.position['x']] = hero
 
-                        elif world_map[hero.position['y'] + 1][hero.position['x']].char == 'Æ':
+                        elif (world_map[hero.position['y'] + 1][hero.position['x']].char == 'Æ') and (can_out == True):
                             world_map = pre_world_map
                             hero.pre_object = find_hero(pre_world_map).pre_object
                             hero.change_position(find_hero(pre_world_map).position)
@@ -138,7 +138,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                             hero.pre_object = world_map[hero.position['y']][hero.position['x']]
                             world_map[hero.position['y']][hero.position['x']] = hero
 
-                        elif world_map[hero.position['y']][hero.position['x'] + 1].char == 'Æ':
+                        elif (world_map[hero.position['y']][hero.position['x'] + 1].char == 'Æ') and (can_out == True):
                             world_map = pre_world_map
                             hero.pre_object = find_hero(pre_world_map).pre_object
                             hero.change_position(find_hero(pre_world_map).position)
@@ -178,7 +178,7 @@ def command_line(hero, world_map, pre_world_map, info, save_data):
                             hero.pre_object = world_map[hero.position['y']][hero.position['x']]
                             world_map[hero.position['y']][hero.position['x']] = hero
 
-                        elif world_map[hero.position['y']][hero.position['x'] - 1].char == 'Æ':
+                        elif (world_map[hero.position['y']][hero.position['x'] - 1].char == 'Æ') and (can_out == True):
                             world_map = pre_world_map
                             hero.pre_object = find_hero(pre_world_map).pre_object
                             hero.change_position(find_hero(pre_world_map).position)

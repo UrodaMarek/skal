@@ -106,3 +106,9 @@ def print_world(world):
         for j in range(0, len(world[0])):
             print(world[i][j].char, end='')
         print()
+
+def set_people(tuple_people, world_map):
+    for human in tuple_people:
+        world_map[human.position['y']][human.position['x']] = human
+    
+    return world_map
