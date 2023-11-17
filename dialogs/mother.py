@@ -1,11 +1,18 @@
 from interface import say, prefix, clear
 
-name = "mother"
-
+def typical(name, hero_name):
+    say("Idź poszukaj brata" , name)
+    clear()
+    
 def wake_up(name, hero_name):
     localization = "Dom"
+    i = 0
     while 1 < 2:
-        say("Wstawaj Nói, już ranek.", name)
+        if i == 0:
+            say("Wstawaj Nói, już ranek.", name)
+            i += 1
+        else:
+            say("Wstań i idź poszukaj brata" , name)
 
         print("""
         1. Już wstaję.
@@ -47,7 +54,7 @@ def wake_up(name, hero_name):
                 case '1':
                     say("Tak. Ciągle ten starzec.", hero_name)
                     say("Powinieneś się udać do jakiegoś kapłana, albo Volvy.", name)
-                    say("Te sny są coraz bardziej niepokojące")
+                    say("Te sny są coraz bardziej niepokojące", name)
                     break
                 case '2':
                     say("Nie.", hero_name)

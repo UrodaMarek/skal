@@ -26,7 +26,7 @@ I pomnę dziewięć światów i dziewięć
     world = gen_village(village_6_map)
     hero = Hero.create_pre_hero({'x': 40,'y': 7})
     hero.pre_object = world[hero.position['y']][hero.position['x']]
-    mother = Human("Mother", "", 1000, 1000, {}, None, None, None, 1000, {'x': 40, 'y': 6}, "female")
+    mother = Human("Mother", "", 1000, 1000, {}, None, None, None, 1000, {'x': 40, 'y': 6}, "female", "mother")
     set_people((mother, hero),world)
     pre_world_map = None
     can_out = False
@@ -40,5 +40,5 @@ I pomnę dziewięć światów i dziewięć
             hero = returned[0]
             world = returned[1]
             pre_world_map = returned[2]
-        if hero.position['y'] < 14:
+        if hero.position['y'] > 14:
             break
