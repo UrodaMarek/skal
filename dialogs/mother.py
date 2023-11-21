@@ -1,7 +1,8 @@
-from interface import say, prefix, clear
+from interface import say, prefix, clear, pause
 
 def typical(name, hero_name):
     say("Idź poszukaj brata" , name)
+    pause()
     clear()
     
 def wake_up(name, hero_name):
@@ -13,6 +14,9 @@ def wake_up(name, hero_name):
             i += 1
         else:
             say("Wstań i idź poszukaj brata" , name)
+            pause()
+            clear()
+            break
 
         print("""
         1. Już wstaję.
@@ -40,6 +44,8 @@ def wake_up(name, hero_name):
                     return None
                 case _:
                     pass
+        pause()
+        clear()
         say("Znowu masz koszmary?", name)
 
         print("""
@@ -63,3 +69,6 @@ def wake_up(name, hero_name):
                     break
                 case _:
                     pass
+        
+        pause()
+        clear()

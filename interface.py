@@ -7,6 +7,8 @@ from world import gen_village, gen_world, find_hero
 
 clear = lambda: system('clear')
 
+pause = lambda: input("\nNaciśnij ENTER aby kontynuować: ") 
+
 def say(words, name=""):
     if not name == "":
         print(":[ " + name + " ]:⮞ ", end='')
