@@ -19,3 +19,10 @@ I pomnę dziewięć światów i dziewięć
         print(odin_face)
         clear()
         sleep(0.5)
+
+def home_in_fire():
+    clear()
+    say("""
+Jedyne co jeszcze pamiętam z tamtych czasów,
+to strach, swąd spalonego mięsa, i twarz tego gnoja.""")
+    pause()
